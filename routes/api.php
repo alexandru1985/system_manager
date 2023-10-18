@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\UserInterface\Api\Controllers\Companies\CompanyController;
+use App\UserInterface\Api\Controllers\Stations\StationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('companies', CompanyController::class);
+Route::apiResource('stations', StationController::class);
