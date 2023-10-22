@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('stations/filter', [StationController::class, 'getFilteredStations']);
 Route::apiResource('companies', CompanyController::class);
 Route::apiResource('stations', StationController::class);

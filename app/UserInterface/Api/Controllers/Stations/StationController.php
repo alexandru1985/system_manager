@@ -7,12 +7,15 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Domain\Actions\Stations\GetStationsAction;
+use App\Domain\Actions\Stations\GetFilteredStationsAction;
 use App\Domain\Actions\Stations\StoreStationAction;
 use App\Domain\Actions\Stations\ShowStationAction;
 use App\Domain\Actions\Stations\UpdateStationAction;
 use App\Domain\Actions\Stations\DeleteStationAction;
 use App\Domain\Models\Stations\Station;
 use App\Domain\Requests\Stations\StationRequest;
+use App\Domain\Requests\Stations\FilteredStationRequest;
+use App\Domain\Models\Companies\Company;
 
 class StationController extends Controller
 {
@@ -57,6 +60,17 @@ class StationController extends Controller
     {
         return response()->json(
             $deleteStation->handle($station),
+            Response::HTTP_OK
+        );
+    }
+
+    public function getFilteredStations(
+        FilteredStationRequest $filteredStationRequest,
+        GetFilteredStationsAction $getfilteredStations,
+        Station $station,
+        ) : JsonResponse {
+        return response()->json(
+            $getfilteredStations->handle($station, $filteredStationRequest->all()),
             Response::HTTP_OK
         );
     }
