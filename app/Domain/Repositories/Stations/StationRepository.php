@@ -44,10 +44,10 @@ class StationRepository extends BaseRepository
             ->orderBy('distance',"asc")
             ->get()->toArray();
 
-        return $this->groupeStationsToEachLocation($filterStationsOnLocationByDistance);
+        return $this->groupStationsToEachLocation($filterStationsOnLocationByDistance);
     }
 
-    public function groupeStationsToEachLocation(array $stations): array 
+    public function groupStationsToEachLocation(array $stations): array 
     {
         $result = [];
         $latitude = 'latitude';

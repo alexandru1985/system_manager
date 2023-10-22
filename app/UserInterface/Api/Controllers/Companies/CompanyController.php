@@ -18,49 +18,49 @@ class CompanyController extends Controller
 {
     public function index(
         GetCompaniesAction $getCompanies, 
-        Company $Company
+        Company $company
     ): JsonResponse {
-        return response()->json($getCompanies->handle($Company), Response::HTTP_OK);
+        return response()->json($getCompanies->handle($company), Response::HTTP_OK);
     }
 
     public function store(
         StoreCompanyAction $storeCompany, 
-        CompanyRequest $request, 
-        Company $Company
+        CompanyRequest $companyRequest, 
+        Company $company
     ): JsonResponse {
         return response()->json(
-            $storeCompany->handle($Company, $request->all()),
+            $storeCompany->handle($company, $companyRequest->all()),
             Response::HTTP_CREATED
         );
     }
 
     public function show(
         ShowCompanyAction $showCompany, 
-        Company $Company
+        Company $company
     ): JsonResponse {
         return response()->json(
-            $showCompany->handle($Company),
+            $showCompany->handle($company),
             Response::HTTP_OK
         );
     }
 
     public function update(
         UpdateCompanyAction $updateCompany, 
-        CompanyRequest $request, 
-        Company $Company
+        CompanyRequest $companyRequest, 
+        Company $company
     ): JsonResponse {
         return response()->json(
-            $updateCompany->handle($Company, $request->all()),
+            $updateCompany->handle($company, $companyRequest->all()),
             Response::HTTP_OK
         );
     }
 
     public function destroy(
         DeleteCompanyAction $deleteCompany, 
-        Company $Company
+        Company $company
     ): JsonResponse {
         return response()->json(
-            $deleteCompany->handle($Company),
+            $deleteCompany->handle($company),
             Response::HTTP_OK
         );
     }

@@ -26,11 +26,11 @@ class StationController extends Controller
 
     public function store(
         StoreStationAction $storeStation, 
-        StationRequest $request, 
+        StationRequest $stationRequest, 
         Station $station
     ): JsonResponse {
         return response()->json(
-            $storeStation->handle($station, $request->all()),
+            $storeStation->handle($station, $stationRequest->all()),
             Response::HTTP_CREATED
         );
     }
@@ -47,11 +47,11 @@ class StationController extends Controller
 
     public function update(
         UpdateStationAction $updateStation, 
-        StationRequest $request, 
+        StationRequest $stationRequest, 
         Station $station
     ): JsonResponse {
         return response()->json(
-            $updateStation->handle($station, $request->all()),
+            $updateStation->handle($station, $stationRequest->all()),
             Response::HTTP_OK
         );
     }
