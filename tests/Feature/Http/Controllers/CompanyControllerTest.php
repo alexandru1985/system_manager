@@ -14,8 +14,8 @@ class CompanyControllerTest extends TestCase
 
         $this->json('get', 'api/companies')
             ->assertStatus(Response::HTTP_OK)
-            ->assertSee($firstCompany->name)
-            ->assertSee($lastCompany->name);
+            ->assertSee($firstCompany->name, false)
+            ->assertSee($lastCompany->name, false);
     }
 
     public function testCompanyIsRetreived() 
@@ -24,7 +24,7 @@ class CompanyControllerTest extends TestCase
 
         $this->json('get', 'api/companies/' . $firstCompany->id)
             ->assertStatus(Response::HTTP_OK)
-            ->assertSee($firstCompany->name);
+            ->assertSee($firstCompany->name, false);
     }
 
     

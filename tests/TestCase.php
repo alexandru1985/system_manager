@@ -12,12 +12,12 @@ use App\Domain\Repositories\Companies\CompanyRepository;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, RefreshDatabase;
+    use CreatesApplication;
 
     public function setUp(): void
     {
         parent::setUp();
-        Artisan::call('db:seed');
+        Artisan::call('migrate:fresh --seed');
 
         $this->station = new Station();
         $this->stationRepository = new StationRepository($this->station);

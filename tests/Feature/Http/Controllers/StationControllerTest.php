@@ -14,8 +14,8 @@ class StationControllerTest extends TestCase
 
         $this->json('get', 'api/stations')
             ->assertStatus(Response::HTTP_OK)
-            ->assertSee($firstStation->name)
-            ->assertSee($lastStation->name);
+            ->assertSee($firstStation->name, false)
+            ->assertSee($lastStation->name, false);
     }
 
     public function testStationIsRetreived() 
@@ -24,7 +24,7 @@ class StationControllerTest extends TestCase
 
         $this->json('get', 'api/stations/' . $firstStation->id)
             ->assertStatus(Response::HTTP_OK)
-            ->assertSee($firstStation->name);
+            ->assertSee($firstStation->name, false);
     }
 
     
@@ -79,5 +79,25 @@ class StationControllerTest extends TestCase
         $currentStations = $this->stationRepository->count();
 
         $this->assertEquals($initialStations - 1, $currentStations);
+    }
+
+    public function testfilteredStationsAreListed()
+    {  
+        $payload = [
+            "company_id" => 1, 
+            "latitude" => 51.5804224,
+            "longitude" => -0.1119313,
+            "distance" => 50
+        ];
+
+        $allFilteredStations = $this->stationRepository->filterStations($payload);
+        $getAllLocations = array_keys($allFilteredStations);
+        $firstLocation = current($getAllLocations);
+        $lastLocation = end($getAllLocations);
+
+        $this->json('get', 'api/stations/filter', $payload)
+            ->assertStatus(Response::HTTP_OK)
+            ->assertSee($allFilteredStations[$firstLocation][0]['name'], false)
+            ->assertSee($allFilteredStations[$lastLocation][0]['name'], false);
     }
 }
