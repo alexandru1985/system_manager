@@ -19,58 +19,62 @@ use App\Domain\Models\Companies\Company;
 
 class StationController extends Controller
 {
-    public function index(GetStationsAction $getStations, Station $station): JsonResponse
-    {
-        return response()->json($getStations->handle($station), Response::HTTP_OK);
+    public function index(
+        GetStationsAction $getStationsAction,
+        Station $station
+    ): JsonResponse {
+        return response()->json($getStationsAction->handle($station), Response::HTTP_OK);
     }
 
     public function store(
-        StoreStationAction $storeStation, 
+        StoreStationAction $storeStationAction, 
         StationRequest $stationRequest, 
         Station $station
     ): JsonResponse {
         return response()->json(
-            $storeStation->handle($station, $stationRequest->all()),
+            $storeStationAction->handle($station, $stationRequest->all()),
             Response::HTTP_CREATED
         );
     }
 
     public function show(
-        ShowStationAction $showStation, 
+        ShowStationAction $showStationAction, 
         Station $station
     ): JsonResponse {
         return response()->json(
-            $showStation->handle($station),
+            $showStationAction->handle($station),
             Response::HTTP_OK
         );
     }
 
     public function update(
-        UpdateStationAction $updateStation, 
+        UpdateStationAction $updateStationAction, 
         StationRequest $stationRequest, 
         Station $station
     ): JsonResponse {
         return response()->json(
-            $updateStation->handle($station, $stationRequest->all()),
+            $updateStationAction->handle($station, $stationRequest->all()),
             Response::HTTP_OK
         );
     }
 
-    public function destroy(DeleteStationAction $deleteStation, Station $station): JsonResponse
-    {
+    public function destroy(
+        DeleteStationAction $deleteStationAction, 
+        Station $station
+    ): JsonResponse {
         return response()->json(
-            $deleteStation->handle($station),
+            $deleteStationAction->handle($station),
             Response::HTTP_OK
         );
     }
 
     public function getFilteredStations(
+        GetFilteredStationsAction $getfilteredStationsAction,
         FilteredStationRequest $filteredStationRequest,
-        GetFilteredStationsAction $getfilteredStations,
         Station $station,
-        ) : JsonResponse {
+    ): JsonResponse {
         return response()->json(
-            $getfilteredStations->handle($station, $filteredStationRequest->all()),
+            $getfilteredStationsAction->handle($station, $filteredStationRequest->all()),
             Response::HTTP_OK
         );
     }

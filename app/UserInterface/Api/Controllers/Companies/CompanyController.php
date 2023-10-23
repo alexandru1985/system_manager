@@ -17,50 +17,50 @@ use App\Domain\Requests\Companies\CompanyRequest;
 class CompanyController extends Controller
 {
     public function index(
-        GetCompaniesAction $getCompanies, 
+        GetCompaniesAction $getCompaniesAction, 
         Company $company
     ): JsonResponse {
-        return response()->json($getCompanies->handle($company), Response::HTTP_OK);
+        return response()->json($getCompaniesAction->handle($company), Response::HTTP_OK);
     }
 
     public function store(
-        StoreCompanyAction $storeCompany, 
+        StoreCompanyAction $storeCompanyAction, 
         CompanyRequest $companyRequest, 
         Company $company
     ): JsonResponse {
         return response()->json(
-            $storeCompany->handle($company, $companyRequest->all()),
+            $storeCompanyAction->handle($company, $companyRequest->all()),
             Response::HTTP_CREATED
         );
     }
 
     public function show(
-        ShowCompanyAction $showCompany, 
+        ShowCompanyAction $showCompanyAction, 
         Company $company
     ): JsonResponse {
         return response()->json(
-            $showCompany->handle($company),
+            $showCompanyAction->handle($company),
             Response::HTTP_OK
         );
     }
 
     public function update(
-        UpdateCompanyAction $updateCompany, 
+        UpdateCompanyAction $updateCompanyAction, 
         CompanyRequest $companyRequest, 
         Company $company
     ): JsonResponse {
         return response()->json(
-            $updateCompany->handle($company, $companyRequest->all()),
+            $updateCompanyAction->handle($company, $companyRequest->all()),
             Response::HTTP_OK
         );
     }
 
     public function destroy(
-        DeleteCompanyAction $deleteCompany, 
+        DeleteCompanyAction $deleteCompanyAction, 
         Company $company
     ): JsonResponse {
         return response()->json(
-            $deleteCompany->handle($company),
+            $deleteCompanyAction->handle($company),
             Response::HTTP_OK
         );
     }
