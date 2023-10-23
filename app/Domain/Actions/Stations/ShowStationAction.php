@@ -16,6 +16,6 @@ class ShowStationAction
     { 
         $stationRepository = new StationRepository($station);
 
-        return $stationRepository->findById($station->id);
+        return $stationRepository->findById($station->id, ['*'], ['company']);
     }
 }

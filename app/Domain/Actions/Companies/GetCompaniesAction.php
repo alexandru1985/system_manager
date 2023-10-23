@@ -15,6 +15,6 @@ class GetCompaniesAction
     { 
         $companyRepository = new CompanyRepository($company);
 
-        return $companyRepository->all(['*'], ['station']);
+        return $companyRepository->all();
     }
 }

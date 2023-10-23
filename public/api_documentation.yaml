@@ -63,7 +63,7 @@ paths:
                 properties:
                   id:
                     type: integer
-                    example: 1
+                    example: 4
                   name:
                     type: string
                     example: Company Test
@@ -89,11 +89,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: Company updated
+              $ref: '#/components/schemas/Company'
         required: true
       responses:
         '200':
@@ -108,7 +104,7 @@ paths:
                     example: 1
                   name:
                     type: string
-                    example: Company updated
+                    example: Company Test
                   created_at:
                     type: string
                     example: 2023-10-18T17:41:33.000000Z
@@ -139,7 +135,7 @@ paths:
                     example: 1
                   name:
                     type: string
-                    example: Company updated
+                    example: Top Level Electric Ltd
                   created_at:
                     type: string
                     example: 2023-10-18T17:41:33.000000Z
@@ -167,7 +163,311 @@ paths:
                   properties:
                     message:
                       type: string
-                      example: Company was deleted.                  
+                      example: Company was deleted.    
+  /stations:  
+    get:
+      tags:
+        - Stations
+      summary: Get all stations
+      description: User can get all stations.
+      responses:
+        '200':
+          description: successful operation
+          content:
+            schemas:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  company_id:
+                    type: integer
+                  name:
+                    type: string
+                  latitude:
+                    type: decimal
+                  longitude:
+                    type: decimal
+                  address:
+                    type: text  
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  company:
+                    type: object
+              example:
+              - id: 1
+                company_id: 1
+                name: Durgan LLC
+                latitude: 51.580469
+                longitude: -0.111925
+                address: 72 Denton Road, London, N8 9LW, United Kingdom
+                created_at: '2023-10-18T07:27:02.000000Z'
+                updated_at: '2023-10-20T06:52:10.000000Z'
+                company:
+                  id: 1
+                  name: Top Level Electric Ltd
+                  created_at: 2023-10-22T18:09:19.000000Z
+                  updated_at: 2023-10-22T18:09:19.000000Z
+              - id: 2
+                company_id: 2
+                name: Hegmann Inc
+                latitude: 51.580063
+                longitude: -0.110638
+                address: 2 Hermiston Court, London, N8 8NN, United Kingdom
+                created_at: 2023-10-18T07:27:02.000000Z
+                updated_at: 2023-10-20T06:52:10.000000Z
+                company:
+                  id: 2
+                  name: Fast Charger Ltd
+                  created_at: 2023-10-22T18:09:19.000000Z
+                  updated_at: 2023-10-22T18:09:19.000000Z
+              - id: 3
+                company_id: 1
+                name: Cormier LLC
+                latitude: 51.580469
+                longitude: -0.111925
+                address: Westerham Avenue, London, N9 9BP, United Kingdom
+                created_at: '2023-10-18T07:27:02.000000Z'
+                updated_at: '2023-10-20T06:52:10.000000Z'
+                company:
+                    id: 1
+                    name: Top Level Electric Ltd
+                    created_at: 2023-10-22T18:09:19.000000Z
+                    updated_at: 2023-10-22T18:09:19.000000Z
+    post:
+      tags:
+        - Stations
+      summary: Add new station
+      description: User can add a new station.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Station'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 75
+                  company_id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: Station Test
+                  latitude:
+                    type: decimal
+                    example: 51.5804224
+                  longitude:
+                    type: decimal
+                    example: -0.1119313
+                  address:
+                    type: text 
+                    example: 72 Denton Road, London, N8 9LW, United Kingdom 
+                  created_at:
+                    type: string
+                    example: 2023-10-18T17:41:33.000000Z
+                  updated_at:
+                    type: string
+                    example: 2023-10-18T17:41:33.000000Z
+  /stations/{id}:
+    put:
+      tags:
+        - Stations
+      summary: Update station
+      description: User can update a station by id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Station'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 70
+                  company_id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: Station Test
+                  latitude:
+                    type: decimal
+                    example: 51.5804224
+                  longitude:
+                    type: decimal
+                    example: -0.1119313
+                  address:
+                    type: text 
+                    example: 72 Denton Road, London, N8 9LW, United Kingdom 
+                  created_at:
+                    type: string
+                    example: 2023-10-18T17:41:33.000000Z
+                  updated_at:
+                    type: string
+                    example: 2023-10-18T17:41:33.000000Z
+    get:
+      tags:
+        - Stations
+      summary: Get station
+      description: User can get a station by id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  company_id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: Cormier LLC
+                  latitude:
+                    type: decimal
+                    example: 51.5804224
+                  longitude:
+                    type: decimal
+                    example: -0.1119313
+                  address:
+                    type: text 
+                    example: 72 Denton Road, London, N8 9LW, United Kingdom 
+                  created_at:
+                    type: string
+                    example: 2023-10-18T17:41:33.000000Z
+                  updated_at:
+                    type: string
+                    example: 2023-10-18T17:41:33.000000Z               
+                  company:
+                    type: object
+                    example:
+                      id: 1
+                      name: Top Level Electric Ltd
+                      created_at: 2023-10-22T18:09:19.000000Z
+                      updated_at: 2023-10-22T18:09:19.000000Z   
+    delete:
+        tags:
+          - Stations
+        summary: Delete station
+        description: User can delete a station by id.
+        parameters:
+          - name: id
+            in: path
+            required: true
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                      example: Station was deleted.   
+  /stations/filter:
+    get:
+      tags:
+        - Stations
+      summary: Filter stations
+      description: User can filter stations by company_id, a place given of latitude and longitude, and distance.</br> 
+                  Also, stations will be grouped on locations and ordered by distance ascending.</br>
+                  <span>For testing you can copy on required fields the following parameters:</span></br>
+                  <span></span></br>
+                  <span><span>company_id:</span> 1</span></br>
+                  <span><span>latitude:</span> 51.5804224</span></br>
+                  <span><span>longitude:</span> -0.1119313</span></br>
+                  <span><span>distance:</span> 50</span>
+      parameters:
+        - name: company_id
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: latitude
+          in: query
+          required: true
+          schema:
+            type: string  
+        - name: longitude
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: distance
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location_latitude_51.580469_and_longitude_-0.111925:
+                    type: array
+                    example:
+                    - id: 1
+                      company_id: 1
+                      name: Cormier LLC
+                      latitude: 51.580469
+                      longitude: -0.111925
+                      distance: 0.0051998204199455835
+                    - id: 2
+                      company_id: 1
+                      name: Dare PLC
+                      latitude: 51.580469
+                      longitude: -0.111925
+                      distance: 0.0051998204199455835
+                  location_latitude_51.5804224_and_longitude_-0.1119313:
+                    type: array
+                    example:
+                    - id: 8
+                      company_id: 1
+                      name: Turner LLC
+                      latitude: 51.5804224
+                      longitude: -0.1119313
+                      distance: 0.09789380658802722                                             
 components:
   schemas:
     Company:
@@ -178,5 +478,28 @@ components:
         name:
           type: string
           example: Company Test
-    
+    Station:
+      required:
+        - company_id
+        - name
+        - latitude
+        - longitude
+        - address
+      type: object
+      properties:
+        company_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Station Test
+        latitude:
+          type: decimal
+          example: 51.5804224
+        longitude:
+          type: decimal
+          example: -0.1119313
+        address:
+          type: text
+          example: 72 Denton Road, London, N8 9LW, United Kingdom 
   
