@@ -23,7 +23,10 @@ class StationController extends Controller
         GetStationsAction $getStationsAction,
         Station $station
     ): JsonResponse {
-        return response()->json($getStationsAction->handle($station), Response::HTTP_OK);
+        return response()->json(
+            $getStationsAction->handle($station), 
+            Response::HTTP_OK
+        );
     }
 
     public function store(

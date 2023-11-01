@@ -2,7 +2,7 @@
 
 namespace App\Domain\Repositories\Stations;
 
-use App\Infrastructure\Repositories\BaseRepository;
+use App\Domain\Repositories\BaseRepository;
 use DB;
 
 class StationRepository extends BaseRepository
@@ -25,7 +25,7 @@ class StationRepository extends BaseRepository
                 $q->select('latitude')
                 ->from('stations')
                 ->groupBy('latitude')
-                ->havingRaw('COUNT(*) > 1');           
+                ->havingRaw('count(*) > 1');           
             });
 
         /*

@@ -12,7 +12,7 @@ Added features:
 - unit tests;
 - api documentation.
 
-Each main task was split in subtasks. You can follow the working progress seeing commits on this repository.
+Each main task was split in subtasks. You can follow the working progress by seeing commits on this repository.
 
 ## Project Installation 
 

@@ -20,7 +20,10 @@ class CompanyController extends Controller
         GetCompaniesAction $getCompaniesAction, 
         Company $company
     ): JsonResponse {
-        return response()->json($getCompaniesAction->handle($company), Response::HTTP_OK);
+        return response()->json(
+            $getCompaniesAction->handle($company), 
+            Response::HTTP_OK
+        );
     }
 
     public function store(
